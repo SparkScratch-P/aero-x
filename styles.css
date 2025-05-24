@@ -362,33 +362,83 @@ nav ul li a:hover::after {
 .hero-section {
     height: 100vh;
     display: flex;
+    align-items: center;
+    justify-content: center;
     position: relative;
     overflow: hidden;
     padding: 0 var(--space-xl);
 }
 
 .hero-content {
-    width: 50%;
+    width: 100%;
+    max-width: 100vw;
     display: flex;
     flex-direction: column;
+    align-items: center;
     justify-content: center;
+    text-align: center;
     z-index: var(--z-normal);
+    position: relative;
+    margin: 0 auto;
+    padding: 6rem 0;
+    background: rgba(18, 24, 36, 0.55);
+    border-radius: var(--border-radius-md);
+    box-shadow: 0 8px 32px 0 rgba(0,0,0,0.18);
+    backdrop-filter: blur(8px) saturate(120%);
+    -webkit-backdrop-filter: blur(8px) saturate(120%);
+    border: 1.5px solid rgba(0,240,255,0.10);
+    transition: background 0.5s;
 }
 
 .hero-content h1 {
     margin-bottom: var(--space-md);
     position: relative;
+    font-size: 4.5rem;
+    font-family: var(--font-family-heading);
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-primary);
+    text-shadow: 0.05em 0 0 rgba(255, 0, 170, 0.75),
+                 -0.025em -0.05em 0 rgba(0, 240, 255, 0.75),
+                 0.025em 0.05em 0 rgba(0, 240, 255, 0.75);
+    animation: hero-fade-in-up 1.2s cubic-bezier(0.23, 1, 0.32, 1) both, glitch 2s infinite 1.2s;
+}
+
+.hero-content h1::before,
+.hero-content h1::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.hero-content h1::before {
+    left: 2px;
+    text-shadow: -2px 0 var(--color-accent-secondary);
+    animation: glitch-1 2s infinite linear alternate-reverse;
+}
+
+.hero-content h1::after {
+    left: -2px;
+    text-shadow: 2px 0 var(--color-accent-primary);
+    animation: glitch-2 3s infinite linear alternate-reverse;
 }
 
 .hero-content p {
     font-size: var(--font-size-lg);
-    max-width: 500px;
+    max-width: 600px;
     margin-bottom: var(--space-lg);
+    color: var(--color-text-secondary);
 }
 
 .hero-cta {
     display: flex;
     gap: var(--space-md);
+    justify-content: center;
+    width: 100%;
 }
 
 .primary-button {
@@ -630,6 +680,21 @@ nav ul li a:hover::after {
     }
     100% {
         clip-path: inset(35% 0 35% 0);
+    }
+}
+
+@keyframes hero-fade-in-up {
+    0% {
+        opacity: 0;
+        transform: translateY(40px) scale(0.98);
+    }
+    80% {
+        opacity: 1;
+        transform: translateY(-6px) scale(1.03);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
     }
 }
 
@@ -1477,14 +1542,16 @@ footer::before {
     }
     
     .hero-content {
-        width: 100%;
-        text-align: center;
-        align-items: center;
+        padding: 3rem 0.5rem;
+        max-width: 100vw;
+    }
+    
+    .hero-content h1 {
+        font-size: 2.5rem;
     }
     
     .hero-content p {
-        margin-left: auto;
-        margin-right: auto;
+        font-size: var(--font-size-md);
     }
     
     .hero-3d-container {
